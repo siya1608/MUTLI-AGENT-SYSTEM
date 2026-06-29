@@ -127,7 +127,7 @@ MUTLI-AGENT-SYSTEM/
 - **Aurora WebGL Background** — dynamic animated shader background
 - **Three.js Neural Sphere** — rotating 3D point-cloud sphere
 - **Glassmorphism Cards** — frosted glass agent cards with glow effects
-- **Shimmer Text** — animated gradient headline text
+- **Gradient Text** — styled headline text
 - **Live Terminal** — real-time SSE log stream from agents
 - **Navigation Tabs** — Dashboard / Agents / Workflows / Intelligence views
 - **Deploy Modal** — configure and launch agents with LLM engine selection

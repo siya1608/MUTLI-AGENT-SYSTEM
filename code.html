@@ -16,33 +16,33 @@
     theme: {
       extend: {
         colors: {
-          "primary":           "#f472b6",
-          "primary-bright":    "#ec4899",
-          "primary-deep":      "#be185d",
-          "primary-glow":      "#f9a8d4",
+          "primary":           "#6366f1",
+          "primary-bright":    "#818cf8",
+          "primary-deep":      "#4338ca",
+          "primary-glow":      "#c7d2fe",
           "primary-dim":       "#831843",
           "on-primary":        "#1a0010",
           "primary-container": "#9d174d",
-          "secondary":         "#c084fc",
-          "secondary-bright":  "#a855f7",
-          "tertiary":          "#fb7185",
-          "tertiary-soft":     "#fda4af",
-          "surface":           "#0d0510",
-          "surface-container": "#140a1a",
-          "surface-container-high": "#1e1028",
-          "surface-container-highest": "#281535",
-          "surface-dim":       "#07030b",
-          "surface-bright":    "#1e1028",
-          "on-surface":        "#fce7f3",
-          "on-surface-variant":"#d1a3c4",
-          "outline":           "#9d6b8c",
-          "outline-variant":   "#4a1f3a",
-          "background":        "#0d0510",
-          "on-background":     "#fce7f3",
-          "error":             "#fda4af",
-          "surface-variant":   "#2a1230",
-          "inverse-surface":   "#fce7f3",
-          "inverse-on-surface":"#281535"
+          "secondary":         "#38bdf8",
+          "secondary-bright":  "#0ea5e9",
+          "tertiary":          "#38bdf8",
+          "tertiary-soft":     "#7dd3fc",
+          "surface":           "#0b1120",
+          "surface-container": "#111827",
+          "surface-container-high": "#1e2433",
+          "surface-container-highest": "#252d3d",
+          "surface-dim":       "#060c18",
+          "surface-bright":    "#1e2433",
+          "on-surface":        "#e2e8f0",
+          "on-surface-variant":"#94a3b8",
+          "outline":           "#475569",
+          "outline-variant":   "#1e2d45",
+          "background":        "#0b1120",
+          "on-background":     "#e2e8f0",
+          "error":             "#fca5a5",
+          "surface-variant":   "#1e2d45",
+          "inverse-surface":   "#e2e8f0",
+          "inverse-on-surface":"#1e2d45"
         },
         borderRadius: {
           "DEFAULT": "0.125rem",
@@ -57,8 +57,8 @@
           "mono": ["Geist Mono", "monospace"]
         },
         boxShadow: {
-          "glow-pink": "0 0 20px rgba(244, 114, 182, 0.5)",
-          "glow-pink-lg": "0 0 40px rgba(244, 114, 182, 0.4)",
+          "glow-accent": "0 0 20px rgba(99, 102, 241, 0.4)",
+          "glow-accent-lg": "0 0 40px rgba(99, 102, 241, 0.3)",
           "glow-purple": "0 0 20px rgba(192, 132, 252, 0.5)",
         }
       }
@@ -69,8 +69,8 @@
   * { box-sizing: border-box; }
 
   body {
-    background: #07030b;
-    color: #fce7f3;
+    background: #060c18;
+    color: #e2e8f0;
     font-family: 'Geist', sans-serif;
     letter-spacing: 0.01em;
     overflow-x: hidden;
@@ -80,8 +80,8 @@
   /* ─── Scrollbar ─────────────────────────────── */
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.25); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(244,114,182,0.5); }
+  ::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.25); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.4); }
 
   /* ─── Aurora BG ──────────────────────────────── */
   #aurora-bg {
@@ -109,7 +109,7 @@
 
   /* ─── Liquid Card ────────────────────────────── */
   .liquid-card {
-    background: linear-gradient(135deg, rgba(244,114,182,0.06) 0%, rgba(192,132,252,0.04) 50%, rgba(251,113,133,0.03) 100%);
+    background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(99,102,241,0.02) 50%, rgba(30,41,59,0.03) 100%);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border: 1px solid rgba(244, 114, 182, 0.14);
@@ -118,34 +118,32 @@
   }
   .liquid-card:hover {
     transform: scale(1.015);
-    box-shadow: 0 16px 48px -8px rgba(236,72,153,0.3), 0 0 0 1px rgba(244,114,182,0.2);
+    box-shadow: 0 16px 48px -8px rgba(99,102,241,0.2), 0 0 0 1px rgba(99,102,241,0.18);
   }
 
   /* ─── Glow Pulse ────────────────────────────── */
-  .glow-pink { box-shadow: 0 0 20px rgba(244,114,182,0.5); }
-  .glow-pink-lg { box-shadow: 0 0 40px rgba(236,72,153,0.4); }
-  .glow-purple { box-shadow: 0 0 20px rgba(192,132,252,0.5); }
+  .glow-accent { box-shadow: 0 0 20px rgba(99,102,241,0.4); }
 
-  /* ─── Magnetic Button ──────────────────────── */
+  /* ─── Primary Button ──────────────────────── */
   .btn-primary {
-    background: linear-gradient(135deg, #be185d 0%, #ec4899 50%, #f472b6 100%);
+    background: linear-gradient(135deg, #4338ca 0%, #6366f1 100%);
     color: #fff;
     font-weight: 700;
     border-radius: 9999px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(236,72,153,0.4);
+    box-shadow: 0 4px 16px rgba(99,102,241,0.35);
     position: relative;
     overflow: hidden;
   }
   .btn-primary::before {
     content: '';
     position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+    background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 100%);
     pointer-events: none;
   }
   .btn-primary:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 8px 32px rgba(236,72,153,0.6);
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.5);
   }
   .btn-primary:active {
     transform: scale(0.98);
@@ -160,97 +158,69 @@
     to { stroke-dashoffset: -600; }
   }
 
-  /* ─── Orbit Ring ──────────────────────────── */
-  @keyframes orbit {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-  .orbit-ring {
-    animation: orbit 8s linear infinite;
-    transform-origin: center;
-  }
-  .orbit-ring-reverse {
-    animation: orbit 12s linear infinite reverse;
-    transform-origin: center;
-  }
 
-  /* ─── Shimmer ─────────────────────────────── */
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  .shimmer-text {
-    background: linear-gradient(90deg, #f472b6, #c084fc, #fb7185, #f472b6);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
-  }
+
+
 
   /* ─── Metric Pill ─────────────────────────── */
   .metric-pill {
-    background: rgba(244,114,182,0.08);
-    border: 1px solid rgba(244,114,182,0.2);
+    background: rgba(99,102,241,0.08);
+    border: 1px solid rgba(99,102,241,0.18);
     backdrop-filter: blur(12px);
     border-radius: 9999px;
     transition: all 0.3s ease;
   }
   .metric-pill:hover {
-    background: rgba(244,114,182,0.15);
-    box-shadow: 0 0 16px rgba(244,114,182,0.25);
+    background: rgba(99,102,241,0.14);
+    box-shadow: 0 0 12px rgba(99,102,241,0.2);
   }
 
   /* ─── Status Badge ────────────────────────── */
-  .badge-active  { background: rgba(244,114,182,0.15); color: #f9a8d4; border: 1px solid rgba(244,114,182,0.35); }
-  .badge-process { background: rgba(192,132,252,0.15); color: #d8b4fe; border: 1px solid rgba(192,132,252,0.35); }
-  .badge-standby { background: rgba(255,255,255,0.06); color: #d1a3c4;  border: 1px solid rgba(255,255,255,0.12); }
+  .badge-active  { background: rgba(34,197,94,0.12);  color: #86efac; border: 1px solid rgba(34,197,94,0.3);  }
+  .badge-process { background: rgba(99,102,241,0.12); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+  .badge-standby { background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.12); }
 
   /* ─── Terminal ────────────────────────────── */
   .terminal-scroll::-webkit-scrollbar { width: 3px; }
-  .terminal-scroll::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.2); border-radius: 99px; }
+  .terminal-scroll::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.25); border-radius: 99px; }
 
   /* ─── Progress Bars ──────────────────────── */
   .progress-bar {
-    background: linear-gradient(90deg, #be185d, #ec4899, #f472b6);
+    background: linear-gradient(90deg, #4338ca, #6366f1);
     border-radius: 9999px;
-    box-shadow: 0 0 8px rgba(236,72,153,0.5);
     transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
   }
   .progress-bar-secondary {
-    background: linear-gradient(90deg, #7e22ce, #a855f7, #c084fc);
+    background: linear-gradient(90deg, #0369a1, #0ea5e9);
     border-radius: 9999px;
-    box-shadow: 0 0 8px rgba(168,85,247,0.5);
   }
   .progress-bar-tertiary {
-    background: linear-gradient(90deg, #9f1239, #e11d48, #fb7185);
+    background: linear-gradient(90deg, #065f46, #10b981);
     border-radius: 9999px;
-    box-shadow: 0 0 8px rgba(251,113,133,0.5);
   }
 
   /* ─── Input Focus ─────────────────────────── */
   input:focus, textarea:focus, select:focus {
     outline: none;
-    border-color: rgba(244,114,182,0.5) !important;
-    box-shadow: 0 0 0 3px rgba(244,114,182,0.12);
+    border-color: rgba(99,102,241,0.5) !important;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
   }
 
   /* ─── Sidebar Nav Active ──────────────────── */
   .nav-active {
-    background: linear-gradient(135deg, rgba(244,114,182,0.2) 0%, rgba(192,132,252,0.12) 100%);
-    border: 1px solid rgba(244,114,182,0.25);
-    color: #f9a8d4;
-    box-shadow: 0 4px 16px rgba(236,72,153,0.15);
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.25);
+    color: #a5b4fc;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.1);
   }
 
-  /* ─── Section Divider Glow ─────────────────── */
-  .divider-pink { border-color: rgba(244,114,182,0.12); }
+  /* ─── Section Divider ───────────────────────── */
+  .divider-neutral { border-color: rgba(255,255,255,0.08); }
 
   /* ─── Agent Icon Container ─────────────────── */
   .agent-icon {
-    background: linear-gradient(135deg, rgba(244,114,182,0.15) 0%, rgba(192,132,252,0.08) 100%);
-    border: 1px solid rgba(244,114,182,0.25);
-    box-shadow: 0 0 16px rgba(236,72,153,0.2);
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.2);
   }
 
   /* ─── Modal Overlay ────────────────────────── */
@@ -264,12 +234,7 @@
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
   .cursor { animation: blink 1s step-end infinite; }
 
-  /* ─── Floating animation ───────────────────── */
-  @keyframes float {
-    0%,100% { transform: translateY(0px); }
-    50%      { transform: translateY(-6px); }
-  }
-  .float-anim { animation: float 4s ease-in-out infinite; }
+
 </style>
 </head>
 <body>
@@ -283,10 +248,10 @@
     <!-- Logo -->
     <div class="mb-8 px-2">
       <div class="flex items-center gap-3 mb-1">
-        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg glow-pink">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-700 flex items-center justify-center shadow-lg">
           <span class="material-symbols-outlined text-white text-sm" style="font-size:16px">hub</span>
         </div>
-        <h1 class="text-xl font-bold shimmer-text tracking-tight">Midnight OS</h1>
+        <h1 class="text-xl font-bold font-bold tracking-tight text-white">Midnight OS</h1>
       </div>
       <p class="text-[10px] text-on-surface-variant/50 font-mono uppercase tracking-[0.2em] pl-11">Flagship AI · v2026</p>
     </div>
@@ -324,7 +289,7 @@
       </button>
 
       <!-- Status bar -->
-      <div class="pt-4 border-t divider-pink flex items-center justify-between px-1">
+      <div class="pt-4 border-t divider-neutral flex items-center justify-between px-1">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_#34d399]"></span>
           <span class="text-[11px] font-mono text-on-surface-variant/60">ONLINE · 99.9% SLA</span>
@@ -339,7 +304,7 @@
 
     <!-- Top Bar -->
     <header class="glass rounded-full h-14 flex items-center px-6 justify-between sticky top-0 z-50 shadow-xl"
-            style="box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,114,182,0.1)">
+            style="box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.1)">
       <!-- Search -->
       <div class="flex items-center gap-3 flex-1 max-w-lg">
         <span id="btn-search-trigger"
@@ -357,7 +322,7 @@
           <span class="text-on-surface-variant/80">2.4 PetaFLOPS</span>
         </div>
         <div class="w-8 h-8 rounded-full p-0.5 overflow-hidden"
-             style="border: 1px solid rgba(244,114,182,0.4); box-shadow: 0 0 12px rgba(244,114,182,0.25)">
+             style="border: 1px solid rgba(99,102,241,0.3); box-shadow: 0 0 12px rgba(99,102,241,0.25)">
           <img alt="User"
                class="w-full h-full object-cover rounded-full"
                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhe-_3EMC3IBoetz6cBB3xcDYpZtI1HHjbYUYGeVSFy2I5tM4YT71kikv4Rkt9AKu9EFeysyhovrBz6nGtOXSDDPs1NuYC2xhH3TDX8Jcx3i0Cxz4wtFVR5EkegKwkoI_Vbx-wZVP3tmTr5NXgVuhK_SHtBHWI_VrHxcS3Mrx4KZemwU6aDku_q764K-m54cT_UBeyx4zubEOwYg8JG9aMtzjMfzk7ldlbZObkTeaMp1UbnIx4DTLnVPRs3u-GeOrgHbQFSgsVInC9"/>
@@ -377,21 +342,21 @@
           <span class="text-primary font-mono uppercase tracking-widest">Live · 14 Global Nodes</span>
         </div>
         <h2 class="text-5xl font-bold tracking-tight text-white leading-tight">
-          Core Intelligence<br/><span class="shimmer-text">Live</span>
+          Core Intelligence<br/><span class="text-white">Live</span>
         </h2>
         <p class="text-lg text-on-surface-variant/80 max-w-lg mx-auto font-sans leading-relaxed">
           Real-time neural orchestration active across 14 global nodes.<br/>Optimal latency achieved.
         </p>
         <div class="flex flex-wrap gap-3 justify-center mt-6">
-          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim">
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2">
             <span class="text-primary font-bold">OPS:</span>
             <span class="text-on-surface/80">2.4 PetaFLOPS</span>
           </div>
-          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim" style="animation-delay:.5s">
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2" style="animation-delay:.5s">
             <span class="text-secondary font-bold">LATENCY:</span>
             <span class="text-on-surface/80">12ms</span>
           </div>
-          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim" style="animation-delay:1s">
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2" style="animation-delay:1s">
             <span class="text-tertiary font-bold">NODES:</span>
             <span class="text-on-surface/80">14 Active</span>
           </div>
@@ -401,7 +366,7 @@
       <!-- Report container (hidden by default) -->
       <div id="report-container"
            class="relative z-10 w-full max-w-4xl text-left hidden transition-all duration-500 overflow-y-auto max-h-[360px] p-6 rounded-2xl"
-           style="background: rgba(13,5,16,0.7); border: 1px solid rgba(244,114,182,0.15); backdrop-filter: blur(16px);">
+           style="background: rgba(13,5,16,0.7); border: 1px solid rgba(99,102,241,0.12); backdrop-filter: blur(16px);">
         <div id="report-content" class="prose prose-invert max-w-none text-on-surface font-sans text-sm space-y-3"></div>
       </div>
     </section>
@@ -438,7 +403,7 @@
       <!-- Researcher-A -->
       <div class="liquid-card p-6 flex flex-col gap-4">
         <div class="flex justify-between items-start">
-          <div class="agent-icon w-13 h-13 rounded-2xl flex items-center justify-center" style="width:52px;height:52px;background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(168,85,247,0.08));border-color:rgba(192,132,252,0.25);box-shadow:0 0 16px rgba(168,85,247,0.2)">
+          <div class="agent-icon w-13 h-13 rounded-2xl flex items-center justify-center" style="width:52px;height:52px;background:linear-gradient(135deg,rgba(99,102,241,0.1),rgba(56,189,248,0.06));border-color:rgba(99,102,241,0.2);box-shadow:0 0 16px rgba(99,102,241,0.15)">
             <span class="material-symbols-outlined text-secondary" style="font-size:26px">travel_explore</span>
           </div>
           <span class="badge-process px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Processing</span>
@@ -508,24 +473,24 @@
         <div class="flex-1 relative">
           <svg class="w-full h-full" viewBox="0 0 820 200">
             <!-- Connection paths -->
-            <path class="neural-line" d="M100,100 C200,100 200,55 310,55" fill="none" stroke="rgba(244,114,182,0.35)" stroke-width="2"/>
-            <path class="neural-line" d="M100,100 C200,100 200,145 310,145" fill="none" stroke="rgba(244,114,182,0.35)" stroke-width="2" style="animation-delay:-5s"/>
-            <path class="neural-line" d="M310,55 C410,55 450,100 560,100" fill="none" stroke="rgba(192,132,252,0.4)" stroke-width="2" style="animation-delay:-10s"/>
-            <path class="neural-line" d="M310,145 C410,145 450,100 560,100" fill="none" stroke="rgba(192,132,252,0.4)" stroke-width="2" style="animation-delay:-15s"/>
+            <path class="neural-line" d="M100,100 C200,100 200,55 310,55" fill="none" stroke="rgba(99,102,241,0.25)" stroke-width="2"/>
+            <path class="neural-line" d="M100,100 C200,100 200,145 310,145" fill="none" stroke="rgba(99,102,241,0.25)" stroke-width="2" style="animation-delay:-5s"/>
+            <path class="neural-line" d="M310,55 C410,55 450,100 560,100" fill="none" stroke="rgba(56,189,248,0.35)" stroke-width="2" style="animation-delay:-10s"/>
+            <path class="neural-line" d="M310,145 C410,145 450,100 560,100" fill="none" stroke="rgba(56,189,248,0.35)" stroke-width="2" style="animation-delay:-15s"/>
             <path class="neural-line" d="M560,100 L710,100" fill="none" stroke="rgba(251,113,133,0.4)" stroke-width="2" style="animation-delay:-3s"/>
 
             <!-- Glow circles -->
-            <circle cx="100" cy="100" r="12" fill="rgba(244,114,182,0.08)" class="animate-pulse"/>
-            <circle cx="100" cy="100" r="8" fill="#ec4899" class="animate-pulse" style="filter:drop-shadow(0 0 8px #ec4899)"/>
+            <circle cx="100" cy="100" r="12" fill="rgba(99,102,241,0.08)" class="animate-pulse"/>
+            <circle cx="100" cy="100" r="8" fill="#6366f1" class="animate-pulse" style="filter:drop-shadow(0 0 8px #6366f1)"/>
 
             <circle cx="310" cy="55" r="8" fill="rgba(255,255,255,0.25)"/>
-            <circle cx="310" cy="55" r="5" fill="#f9a8d4"/>
+            <circle cx="310" cy="55" r="5" fill="#a5b4fc"/>
 
             <circle cx="310" cy="145" r="8" fill="rgba(255,255,255,0.25)"/>
-            <circle cx="310" cy="145" r="5" fill="#f9a8d4"/>
+            <circle cx="310" cy="145" r="5" fill="#a5b4fc"/>
 
-            <circle cx="560" cy="100" r="12" fill="rgba(192,132,252,0.08)" class="animate-pulse" style="animation-delay:.5s"/>
-            <circle cx="560" cy="100" r="8" fill="#a855f7" style="filter:drop-shadow(0 0 8px #a855f7)"/>
+            <circle cx="560" cy="100" r="12" fill="rgba(56,189,248,0.08)" class="animate-pulse" style="animation-delay:.5s"/>
+            <circle cx="560" cy="100" r="8" fill="#38bdf8" style="filter:drop-shadow(0 0 8px #38bdf8)"/>
 
             <circle cx="710" cy="100" r="14" fill="rgba(251,113,133,0.1)" class="animate-pulse" style="animation-delay:1s"/>
             <circle cx="710" cy="100" r="10" fill="#fb7185" style="filter:drop-shadow(0 0 10px #fb7185)"/>
@@ -533,7 +498,7 @@
 
           <!-- Labels -->
           <div class="absolute top-1/2 left-1 -translate-y-1/2">
-            <span class="text-[9px] font-mono uppercase text-primary/80 bg-primary/8 px-2 py-0.5 rounded" style="background:rgba(244,114,182,0.08)">Input</span>
+            <span class="text-[9px] font-mono uppercase text-primary/80 bg-primary/8 px-2 py-0.5 rounded" style="background:rgba(99,102,241,0.08)">Input</span>
           </div>
           <div class="absolute" style="top:18%;left:36%">
             <span class="text-[9px] font-mono uppercase text-on-surface-variant/60 bg-white/5 px-2 py-0.5 rounded">Tavily</span>
@@ -561,15 +526,15 @@
         </div>
         <div id="system-logs"
              class="flex-1 overflow-y-auto terminal-scroll font-mono text-[11px] space-y-1.5 text-on-surface-variant/70">
-          <p style="color:rgba(244,114,182,0.8)">[14:22:01] Initialization sequence complete.</p>
+          <p style="color:rgba(165,180,252,0.85)">[14:22:01] Initialization sequence complete.</p>
           <p>[14:22:05] Orchestrator-01 spinning up node clusters...</p>
           <p>[14:22:08] Establishing neural handshake with Validator-X.</p>
-          <p style="color:rgba(192,132,252,0.8)">[14:22:12] Researcher-A: Scraping financial indices...</p>
+          <p style="color:rgba(56,189,248,0.8)">[14:22:12] Researcher-A: Scraping financial indices...</p>
           <p>[14:22:15] API Request: GET /market/v2/delta - 200 OK</p>
           <p>[14:22:22] Vector embedding process started: 4.2M tokens.</p>
           <p style="color:rgba(251,113,133,0.8)">[14:22:30] Synthesis complete. Ready for deployment.</p>
           <div class="flex gap-2 mt-2">
-            <span style="color:#f472b6" class="cursor">▋</span>
+            <span style="color:#818cf8" class="cursor">▋</span>
           </div>
         </div>
       </div>
@@ -582,7 +547,7 @@
 <div id="deploy-agent-modal"
      class="fixed inset-0 modal-overlay hidden flex items-center justify-center z-50 transition-opacity duration-300">
   <div class="glass-bright p-8 rounded-vision w-full max-w-lg space-y-6 relative"
-       style="border: 1px solid rgba(244,114,182,0.25); box-shadow: 0 0 60px rgba(236,72,153,0.2), 0 32px 64px rgba(0,0,0,0.6)">
+       style="border: 1px solid rgba(99,102,241,0.25); box-shadow: 0 0 60px rgba(99,102,241,0.15), 0 32px 64px rgba(0,0,0,0.6)">
 
     <!-- Close btn -->
     <button id="modal-close"
@@ -593,7 +558,7 @@
     <div class="space-y-1.5">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl flex items-center justify-center"
-             style="background:linear-gradient(135deg,#be185d,#ec4899);box-shadow:0 0 20px rgba(236,72,153,0.4)">
+             style="background:linear-gradient(135deg,#4338ca,#6366f1);box-shadow:0 0 20px rgba(99,102,241,0.3)">
           <span class="material-symbols-outlined text-white" style="font-size:20px">bolt</span>
         </div>
         <div>
@@ -604,7 +569,7 @@
     </div>
 
     <!-- Divider -->
-    <div class="border-t divider-pink"></div>
+    <div class="border-t divider-neutral"></div>
 
     <!-- Form -->
     <div class="space-y-4">
@@ -612,7 +577,7 @@
         <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">Research Topic / Objective</label>
         <textarea id="modal-query" rows="3"
                   class="w-full text-sm p-3.5 text-white font-sans placeholder-on-surface-variant/40 transition-all"
-                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:14px;resize:none"
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(99,102,241,0.12);border-radius:14px;resize:none"
                   placeholder="e.g., Explain the advancements in Solid State Batteries 2026..."></textarea>
       </div>
 
@@ -621,7 +586,7 @@
           <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">LLM Engine</label>
           <select id="modal-engine"
                   class="w-full text-sm p-3 text-white font-sans"
-                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:12px">
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(99,102,241,0.12);border-radius:12px">
             <option value="gemini">Google Gemini (Recommended)</option>
             <option value="openai">OpenAI GPT-4o-mini</option>
           </select>
@@ -629,7 +594,7 @@
         <div class="space-y-2">
           <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">Depth Limit</label>
           <select class="w-full text-sm p-3 text-white font-sans"
-                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:12px">
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(99,102,241,0.12);border-radius:12px">
             <option value="standard">Standard (5 searches)</option>
             <option value="deep">Deep (10+ searches)</option>
           </select>
@@ -677,7 +642,7 @@
     }
   `;
 
-  // Pink / rose / purple aurora shader
+  // Blue / indigo aurora shader
   const fsSource = `
     precision highp float;
     varying vec2 v_texCoord;
@@ -699,19 +664,19 @@
       float f = 0.5 + 0.5 * sin(p.x + p.y);
 
       // Deep dark base — near black with a rose/purple tint
-      vec3 base   = vec3(0.028, 0.010, 0.045);
+      vec3 base   = vec3(0.02, 0.04, 0.08);
       // Mid — dark magenta
-      vec3 mid    = vec3(0.10,  0.025, 0.12);
+      vec3 mid    = vec3(0.05, 0.08, 0.18);
       // Accent — deep rose
-      vec3 accent = vec3(0.22,  0.04,  0.18);
+      vec3 accent = vec3(0.08, 0.10, 0.28);
 
       vec3 col = mix(base, mid, f);
       col = mix(col, accent, 0.25 * sin(time * 0.4 + 1.0));
 
-      // Aurora glow layer — pink/purple
+      // Aurora glow layer — blue/indigo
       float aurora = smoothstep(0.25, 0.75, f);
-      col += vec3(0.35, 0.05, 0.30) * aurora * 0.12;
-      col += vec3(0.10, 0.00, 0.35) * aurora * 0.08;
+      col += vec3(0.05, 0.15, 0.50) * aurora * 0.12;
+      col += vec3(0.02, 0.10, 0.30) * aurora * 0.08;
 
       gl_FragColor = vec4(col, 1.0);
     }
@@ -757,10 +722,10 @@
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   sphereContainer.appendChild(renderer.domElement);
 
-  // Pink point sphere
+  // Indigo point sphere
   const geo = new THREE.IcosahedronGeometry(1.8, 4);
   const mat = new THREE.PointsMaterial({
-    color: 0xec4899,
+    color: 0x6366f1,
     size: 0.028,
     transparent: true,
     opacity: 0.85,
@@ -771,7 +736,7 @@
 
   // Purple wireframe overlay
   const wireMat = new THREE.MeshBasicMaterial({
-    color: 0xc084fc,
+    color: 0x818cf8,
     wireframe: true,
     transparent: true,
     opacity: 0.04,
@@ -780,14 +745,14 @@
   const wire = new THREE.Mesh(geo, wireMat);
   scene.add(wire);
 
-  // Ambient pink particles
+  // Ambient light particles
   const partGeo = new THREE.BufferGeometry();
   const N = 350;
   const pos = new Float32Array(N * 3);
   for (let i = 0; i < N * 3; i++) pos[i] = (Math.random() - 0.5) * 9;
   partGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
   const partMat = new THREE.PointsMaterial({
-    color: 0xf9a8d4,
+    color: 0xc7d2fe,
     size: 0.010,
     transparent: true,
     opacity: 0.35,
@@ -853,8 +818,8 @@
     const time = new Date().toTimeString().split(' ')[0];
     p.textContent = `[${time}] ${msg}`;
     const colorMap = {
-      primary:   'rgba(244,114,182,0.85)',
-      secondary: 'rgba(192,132,252,0.85)',
+      primary:   'rgba(165,180,252,0.85)',
+      secondary: 'rgba(56,189,248,0.85)',
       tertiary:  'rgba(251,113,133,0.85)',
       error:     'rgba(248,113,113,0.9)',
       default:   'rgba(209,163,196,0.6)'
@@ -943,8 +908,8 @@
     reportContainer.classList.remove('hidden');
     reportContent.innerHTML = `
       <div class="flex flex-col items-center justify-center py-12 gap-4">
-        <div style="width:48px;height:48px;border-radius:50%;border:3px solid rgba(244,114,182,0.3);border-top-color:#ec4899;animation:spin 0.8s linear infinite"></div>
-        <span style="color:rgba(244,114,182,0.9);font-size:15px;font-weight:600">Agents are actively gathering intelligence…</span>
+        <div style="width:48px;height:48px;border-radius:50%;border:3px solid rgba(99,102,241,0.25);border-top-color:#6366f1;animation:spin 0.8s linear infinite"></div>
+        <span style="color:rgba(165,180,252,0.9);font-size:15px;font-weight:600">Agents are actively gathering intelligence…</span>
         <span style="color:rgba(209,163,196,0.5);font-size:12px;font-family:monospace">Researcher-A + Validator-X online</span>
       </div>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
