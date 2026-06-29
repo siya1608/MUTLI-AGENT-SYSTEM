@@ -1,46 +1,46 @@
-# 🌸 Multi-Agent Research Network
+# Multi-Agent Research Network
 
-> **Midnight OS** — A premium, real-time multiagent AI research orchestration platform built with LangChain LCEL Runnables, FastAPI, and a stunning pink glassmorphism UI.
+> **Midnight OS** — A real-time multiagent AI research orchestration platform built with LangChain LCEL Runnables, FastAPI, and a glassmorphism UI.
 
 ![Preview](screen.png)
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Details |
 |---|---|
-| 🤖 **Multi-Agent Pipeline** | `Researcher-A` (Tavily + BeautifulSoup) + `Validator-X` (reasoning) wired via LCEL Runnables |
-| ⚡ **Real-time Streaming** | Server-Sent Events (SSE) stream agent progress live to the UI |
-| 🧠 **Dual LLM Support** | Google Gemini (recommended) with OpenAI GPT-4o-mini fallback |
-| 🌸 **Pink Glassmorphism UI** | WebGL aurora background, Three.js neural sphere, animated gradient cards |
-| 🔍 **Semantic Web Search** | Tavily API for structured web search + BeautifulSoup for deep scraping |
-| 🚀 **FastAPI Backend** | Production-ready async backend with CORS, SSE, and REST endpoints |
+| **Multi-Agent Pipeline** | `Researcher-A` (Tavily + BeautifulSoup) + `Validator-X` (reasoning) wired via LCEL Runnables |
+| **Real-time Streaming** | Server-Sent Events (SSE) stream agent progress live to the UI |
+| **Dual LLM Support** | Google Gemini (recommended) with OpenAI GPT-4o-mini fallback |
+| **Glassmorphism UI** | WebGL aurora background, Three.js neural sphere, animated gradient cards |
+| **Semantic Web Search** | Tavily API for structured web search + BeautifulSoup for deep scraping |
+| **FastAPI Backend** | Production-ready async backend with CORS, SSE, and REST endpoints |
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                     Frontend (code.html)                │
-│  Pink Glassmorphism Dashboard · WebGL Aurora · Three.js │
-│  Navigation · Deploy Modal · Live Terminal · SSE Stream │
-└──────────────────────┬──────────────────────────────────┘
-                       │  HTTP + SSE
-┌──────────────────────▼──────────────────────────────────┐
-│                  FastAPI Backend (app/main.py)           │
-│  POST /api/research → SSE stream of agent events        │
-└──────────────────────┬──────────────────────────────────┘
-                       │  LCEL Runnable Pipeline
-┌──────────────────────▼──────────────────────────────────┐
-│               Agent Orchestration (app/agents.py)       │
-│                                                         │
-│  Query ──► Researcher-A ──► Validator-X ──► Synthesis   │
-│                │                  │                     │
-│            Tavily API         Gemini/OpenAI             │
-│            BS4 Scraper        LLM Reasoning             │
-└─────────────────────────────────────────────────────────┘
++----------------------------------------------------------+
+|                     Frontend (code.html)                 |
+|  Glassmorphism Dashboard  WebGL Aurora  Three.js         |
+|  Navigation  Deploy Modal  Live Terminal  SSE Stream     |
++---------------------+------------------------------------+
+                      |  HTTP + SSE
++---------------------v------------------------------------+
+|                  FastAPI Backend (app/main.py)           |
+|  POST /api/research  ->  SSE stream of agent events      |
++---------------------+------------------------------------+
+                      |  LCEL Runnable Pipeline
++---------------------v------------------------------------+
+|               Agent Orchestration (app/agents.py)        |
+|                                                          |
+|  Query --> Researcher-A --> Validator-X --> Synthesis    |
+|                |                  |                      |
+|            Tavily API         Gemini/OpenAI              |
+|            BS4 Scraper        LLM Reasoning              |
++----------------------------------------------------------+
 ```
 
 ### Agents
@@ -52,7 +52,7 @@
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone the repo
 ```bash
@@ -83,11 +83,11 @@ python3 -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 ### 6. Open the dashboard
-Navigate to → **http://127.0.0.1:8000**
+Navigate to: **http://127.0.0.1:8000**
 
 ---
 
-## 🔑 Environment Variables
+## Environment Variables
 
 Create a `.env` file in the project root:
 
@@ -100,11 +100,11 @@ GOOGLE_API_KEY=AIza...         # Google Gemini (recommended)
 TAVILY_API_KEY=tvly-...        # Get free key at app.tavily.com
 ```
 
-> ⚠️ **Never commit your `.env` file.** It is listed in `.gitignore`.
+> **Never commit your `.env` file.** It is listed in `.gitignore`.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MUTLI-AGENT-SYSTEM/
@@ -112,7 +112,7 @@ MUTLI-AGENT-SYSTEM/
 │   ├── agents.py       # LCEL Runnable agent pipeline
 │   ├── main.py         # FastAPI server + SSE endpoints
 │   └── tools.py        # Tavily + BeautifulSoup tool definitions
-├── code.html           # Pink glassmorphism frontend SPA
+├── code.html           # Frontend dashboard SPA
 ├── .env.example        # Environment variable template
 ├── .gitignore          # Excludes secrets & cache
 ├── requirements.txt    # Python dependencies
@@ -122,10 +122,10 @@ MUTLI-AGENT-SYSTEM/
 
 ---
 
-## 🎨 UI Highlights
+## UI Highlights
 
-- **Aurora WebGL Background** — dynamic pink/magenta/rose shader animation
-- **Three.js Neural Sphere** — rotating 3D point-cloud sphere in hot pink
+- **Aurora WebGL Background** — dynamic animated shader background
+- **Three.js Neural Sphere** — rotating 3D point-cloud sphere
 - **Glassmorphism Cards** — frosted glass agent cards with glow effects
 - **Shimmer Text** — animated gradient headline text
 - **Live Terminal** — real-time SSE log stream from agents
@@ -134,7 +134,7 @@ MUTLI-AGENT-SYSTEM/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Backend**
 - Python 3.11+
@@ -152,12 +152,12 @@ MUTLI-AGENT-SYSTEM/
 
 ---
 
-## 📄 License
+## License
 
 MIT License — feel free to use, modify, and distribute.
 
 ---
 
 <div align="center">
-  Made with 🌸 by <a href="https://github.com/siya1608">siya1608</a>
+  Made by <a href="https://github.com/siya1608">siya1608</a>
 </div>
