@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Midnight OS | Multiagent Research Network</title>
+<meta name="description" content="Premium multiagent AI research orchestration platform with real-time neural intelligence."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary":           "#f472b6",
+          "primary-bright":    "#ec4899",
+          "primary-deep":      "#be185d",
+          "primary-glow":      "#f9a8d4",
+          "primary-dim":       "#831843",
+          "on-primary":        "#1a0010",
+          "primary-container": "#9d174d",
+          "secondary":         "#c084fc",
+          "secondary-bright":  "#a855f7",
+          "tertiary":          "#fb7185",
+          "tertiary-soft":     "#fda4af",
+          "surface":           "#0d0510",
+          "surface-container": "#140a1a",
+          "surface-container-high": "#1e1028",
+          "surface-container-highest": "#281535",
+          "surface-dim":       "#07030b",
+          "surface-bright":    "#1e1028",
+          "on-surface":        "#fce7f3",
+          "on-surface-variant":"#d1a3c4",
+          "outline":           "#9d6b8c",
+          "outline-variant":   "#4a1f3a",
+          "background":        "#0d0510",
+          "on-background":     "#fce7f3",
+          "error":             "#fda4af",
+          "surface-variant":   "#2a1230",
+          "inverse-surface":   "#fce7f3",
+          "inverse-on-surface":"#281535"
+        },
+        borderRadius: {
+          "DEFAULT": "0.125rem",
+          "lg": "0.5rem",
+          "xl": "1rem",
+          "2xl": "1.5rem",
+          "full": "9999px",
+          "vision": "24px"
+        },
+        fontFamily: {
+          "sans": ["Geist", "sans-serif"],
+          "mono": ["Geist Mono", "monospace"]
+        },
+        boxShadow: {
+          "glow-pink": "0 0 20px rgba(244, 114, 182, 0.5)",
+          "glow-pink-lg": "0 0 40px rgba(244, 114, 182, 0.4)",
+          "glow-purple": "0 0 20px rgba(192, 132, 252, 0.5)",
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    background: #07030b;
+    color: #fce7f3;
+    font-family: 'Geist', sans-serif;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ─── Scrollbar ─────────────────────────────── */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.25); border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(244,114,182,0.5); }
+
+  /* ─── Aurora BG ──────────────────────────────── */
+  #aurora-bg {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -10;
+  }
+
+  /* ─── Glassmorphism ──────────────────────────── */
+  .glass {
+    background: rgba(30, 8, 40, 0.45);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(244, 114, 182, 0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .glass-bright {
+    background: rgba(40, 12, 55, 0.55);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid rgba(244, 114, 182, 0.18);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
+  }
+
+  /* ─── Liquid Card ────────────────────────────── */
+  .liquid-card {
+    background: linear-gradient(135deg, rgba(244,114,182,0.06) 0%, rgba(192,132,252,0.04) 50%, rgba(251,113,133,0.03) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(244, 114, 182, 0.14);
+    border-radius: 28px;
+    transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.4s ease;
+  }
+  .liquid-card:hover {
+    transform: scale(1.015);
+    box-shadow: 0 16px 48px -8px rgba(236,72,153,0.3), 0 0 0 1px rgba(244,114,182,0.2);
+  }
+
+  /* ─── Glow Pulse ────────────────────────────── */
+  .glow-pink { box-shadow: 0 0 20px rgba(244,114,182,0.5); }
+  .glow-pink-lg { box-shadow: 0 0 40px rgba(236,72,153,0.4); }
+  .glow-purple { box-shadow: 0 0 20px rgba(192,132,252,0.5); }
+
+  /* ─── Magnetic Button ──────────────────────── */
+  .btn-primary {
+    background: linear-gradient(135deg, #be185d 0%, #ec4899 50%, #f472b6 100%);
+    color: #fff;
+    font-weight: 700;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(236,72,153,0.4);
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-primary::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .btn-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 32px rgba(236,72,153,0.6);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* ─── Neural Lines ────────────────────────── */
+  .neural-line {
+    stroke-dasharray: 8 4;
+    animation: flow 20s linear infinite;
+  }
+  @keyframes flow {
+    to { stroke-dashoffset: -600; }
+  }
+
+  /* ─── Orbit Ring ──────────────────────────── */
+  @keyframes orbit {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .orbit-ring {
+    animation: orbit 8s linear infinite;
+    transform-origin: center;
+  }
+  .orbit-ring-reverse {
+    animation: orbit 12s linear infinite reverse;
+    transform-origin: center;
+  }
+
+  /* ─── Shimmer ─────────────────────────────── */
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, #f472b6, #c084fc, #fb7185, #f472b6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* ─── Metric Pill ─────────────────────────── */
+  .metric-pill {
+    background: rgba(244,114,182,0.08);
+    border: 1px solid rgba(244,114,182,0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+  }
+  .metric-pill:hover {
+    background: rgba(244,114,182,0.15);
+    box-shadow: 0 0 16px rgba(244,114,182,0.25);
+  }
+
+  /* ─── Status Badge ────────────────────────── */
+  .badge-active  { background: rgba(244,114,182,0.15); color: #f9a8d4; border: 1px solid rgba(244,114,182,0.35); }
+  .badge-process { background: rgba(192,132,252,0.15); color: #d8b4fe; border: 1px solid rgba(192,132,252,0.35); }
+  .badge-standby { background: rgba(255,255,255,0.06); color: #d1a3c4;  border: 1px solid rgba(255,255,255,0.12); }
+
+  /* ─── Terminal ────────────────────────────── */
+  .terminal-scroll::-webkit-scrollbar { width: 3px; }
+  .terminal-scroll::-webkit-scrollbar-thumb { background: rgba(244,114,182,0.2); border-radius: 99px; }
+
+  /* ─── Progress Bars ──────────────────────── */
+  .progress-bar {
+    background: linear-gradient(90deg, #be185d, #ec4899, #f472b6);
+    border-radius: 9999px;
+    box-shadow: 0 0 8px rgba(236,72,153,0.5);
+    transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .progress-bar-secondary {
+    background: linear-gradient(90deg, #7e22ce, #a855f7, #c084fc);
+    border-radius: 9999px;
+    box-shadow: 0 0 8px rgba(168,85,247,0.5);
+  }
+  .progress-bar-tertiary {
+    background: linear-gradient(90deg, #9f1239, #e11d48, #fb7185);
+    border-radius: 9999px;
+    box-shadow: 0 0 8px rgba(251,113,133,0.5);
+  }
+
+  /* ─── Input Focus ─────────────────────────── */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: rgba(244,114,182,0.5) !important;
+    box-shadow: 0 0 0 3px rgba(244,114,182,0.12);
+  }
+
+  /* ─── Sidebar Nav Active ──────────────────── */
+  .nav-active {
+    background: linear-gradient(135deg, rgba(244,114,182,0.2) 0%, rgba(192,132,252,0.12) 100%);
+    border: 1px solid rgba(244,114,182,0.25);
+    color: #f9a8d4;
+    box-shadow: 0 4px 16px rgba(236,72,153,0.15);
+  }
+
+  /* ─── Section Divider Glow ─────────────────── */
+  .divider-pink { border-color: rgba(244,114,182,0.12); }
+
+  /* ─── Agent Icon Container ─────────────────── */
+  .agent-icon {
+    background: linear-gradient(135deg, rgba(244,114,182,0.15) 0%, rgba(192,132,252,0.08) 100%);
+    border: 1px solid rgba(244,114,182,0.25);
+    box-shadow: 0 0 16px rgba(236,72,153,0.2);
+  }
+
+  /* ─── Modal Overlay ────────────────────────── */
+  .modal-overlay {
+    background: rgba(7,3,11,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* ─── Typing Cursor ────────────────────────── */
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  .cursor { animation: blink 1s step-end infinite; }
+
+  /* ─── Floating animation ───────────────────── */
+  @keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50%      { transform: translateY(-6px); }
+  }
+  .float-anim { animation: float 4s ease-in-out infinite; }
+</style>
+</head>
+<body>
+<canvas id="aurora-bg"></canvas>
+
+<!-- ═══════════════ LAYOUT ═══════════════ -->
+<div class="flex h-screen overflow-hidden p-4 gap-4">
+
+  <!-- ─── Sidebar ─── -->
+  <aside class="w-68 glass rounded-vision flex flex-col p-5 z-40 shrink-0" style="width:272px">
+    <!-- Logo -->
+    <div class="mb-8 px-2">
+      <div class="flex items-center gap-3 mb-1">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center shadow-lg glow-pink">
+          <span class="material-symbols-outlined text-white text-sm" style="font-size:16px">hub</span>
+        </div>
+        <h1 class="text-xl font-bold shimmer-text tracking-tight">Midnight OS</h1>
+      </div>
+      <p class="text-[10px] text-on-surface-variant/50 font-mono uppercase tracking-[0.2em] pl-11">Flagship AI · v2026</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 space-y-1.5">
+      <a id="nav-dashboard" href="#"
+         class="nav-active flex items-center gap-3.5 p-3 rounded-xl transition-all duration-200">
+        <span class="material-symbols-outlined text-primary" style="font-size:20px">dashboard</span>
+        <span class="font-semibold text-sm">Dashboard</span>
+      </a>
+      <a id="nav-agents" href="#"
+         class="flex items-center gap-3.5 p-3 rounded-xl hover:bg-white/5 text-on-surface-variant transition-all duration-200">
+        <span class="material-symbols-outlined" style="font-size:20px">smart_toy</span>
+        <span class="text-sm">Agents</span>
+      </a>
+      <a id="nav-workflows" href="#"
+         class="flex items-center gap-3.5 p-3 rounded-xl hover:bg-white/5 text-on-surface-variant transition-all duration-200">
+        <span class="material-symbols-outlined" style="font-size:20px">account_tree</span>
+        <span class="text-sm">Workflows</span>
+      </a>
+      <a id="nav-intelligence" href="#"
+         class="flex items-center gap-3.5 p-3 rounded-xl hover:bg-white/5 text-on-surface-variant transition-all duration-200">
+        <span class="material-symbols-outlined" style="font-size:20px">analytics</span>
+        <span class="text-sm">Intelligence</span>
+      </a>
+    </nav>
+
+    <!-- Bottom actions -->
+    <div class="mt-auto space-y-4">
+      <button id="btn-deploy-agent"
+              class="btn-primary w-full py-3.5 px-5 flex items-center justify-center gap-2 text-sm">
+        <span class="material-symbols-outlined" style="font-size:18px">bolt</span>
+        Deploy New Agent
+      </button>
+
+      <!-- Status bar -->
+      <div class="pt-4 border-t divider-pink flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_#34d399]"></span>
+          <span class="text-[11px] font-mono text-on-surface-variant/60">ONLINE · 99.9% SLA</span>
+        </div>
+        <span class="text-[11px] font-mono text-primary/60" id="live-time">--:--:--</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── Main Content ─── -->
+  <main class="flex-1 flex flex-col gap-4 overflow-y-auto pr-1">
+
+    <!-- Top Bar -->
+    <header class="glass rounded-full h-14 flex items-center px-6 justify-between sticky top-0 z-50 shadow-xl"
+            style="box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(244,114,182,0.1)">
+      <!-- Search -->
+      <div class="flex items-center gap-3 flex-1 max-w-lg">
+        <span id="btn-search-trigger"
+              class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform"
+              style="font-size:20px">search</span>
+        <input id="query-input"
+               class="bg-transparent border-none focus:ring-0 text-sm w-full font-sans placeholder-on-surface-variant/40"
+               placeholder="Enter research query & press Enter…"
+               type="text"/>
+      </div>
+      <!-- Right side -->
+      <div class="flex items-center gap-4">
+        <div class="metric-pill px-4 py-1.5 text-[11px] font-mono hidden sm:flex items-center gap-1.5">
+          <span class="text-primary">●</span>
+          <span class="text-on-surface-variant/80">2.4 PetaFLOPS</span>
+        </div>
+        <div class="w-8 h-8 rounded-full p-0.5 overflow-hidden"
+             style="border: 1px solid rgba(244,114,182,0.4); box-shadow: 0 0 12px rgba(244,114,182,0.25)">
+          <img alt="User"
+               class="w-full h-full object-cover rounded-full"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhe-_3EMC3IBoetz6cBB3xcDYpZtI1HHjbYUYGeVSFy2I5tM4YT71kikv4Rkt9AKu9EFeysyhovrBz6nGtOXSDDPs1NuYC2xhH3TDX8Jcx3i0Cxz4wtFVR5EkegKwkoI_Vbx-wZVP3tmTr5NXgVuhK_SHtBHWI_VrHxcS3Mrx4KZemwU6aDku_q764K-m54cT_UBeyx4zubEOwYg8JG9aMtzjMfzk7ldlbZObkTeaMp1UbnIx4DTLnVPRs3u-GeOrgHbQFSgsVInC9"/>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── HERO SECTION ─── -->
+    <section class="liquid-card min-h-[400px] relative overflow-hidden flex flex-col items-center justify-center text-center p-10">
+      <!-- Neural Sphere Canvas -->
+      <div class="absolute inset-0 z-0" id="neural-sphere"></div>
+
+      <!-- Default hero content -->
+      <div id="default-hero-content" class="relative z-10 space-y-5 transition-all duration-500">
+        <div class="inline-flex items-center gap-2 metric-pill px-4 py-1.5 text-xs mb-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          <span class="text-primary font-mono uppercase tracking-widest">Live · 14 Global Nodes</span>
+        </div>
+        <h2 class="text-5xl font-bold tracking-tight text-white leading-tight">
+          Core Intelligence<br/><span class="shimmer-text">Live</span>
+        </h2>
+        <p class="text-lg text-on-surface-variant/80 max-w-lg mx-auto font-sans leading-relaxed">
+          Real-time neural orchestration active across 14 global nodes.<br/>Optimal latency achieved.
+        </p>
+        <div class="flex flex-wrap gap-3 justify-center mt-6">
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim">
+            <span class="text-primary font-bold">OPS:</span>
+            <span class="text-on-surface/80">2.4 PetaFLOPS</span>
+          </div>
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim" style="animation-delay:.5s">
+            <span class="text-secondary font-bold">LATENCY:</span>
+            <span class="text-on-surface/80">12ms</span>
+          </div>
+          <div class="metric-pill px-5 py-2.5 text-sm font-mono flex items-center gap-2 float-anim" style="animation-delay:1s">
+            <span class="text-tertiary font-bold">NODES:</span>
+            <span class="text-on-surface/80">14 Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Report container (hidden by default) -->
+      <div id="report-container"
+           class="relative z-10 w-full max-w-4xl text-left hidden transition-all duration-500 overflow-y-auto max-h-[360px] p-6 rounded-2xl"
+           style="background: rgba(13,5,16,0.7); border: 1px solid rgba(244,114,182,0.15); backdrop-filter: blur(16px);">
+        <div id="report-content" class="prose prose-invert max-w-none text-on-surface font-sans text-sm space-y-3"></div>
+      </div>
+    </section>
+
+    <!-- ─── AGENT GRID ─── -->
+    <div id="agent-grid-section" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <!-- Orchestrator-01 -->
+      <div class="liquid-card p-6 flex flex-col gap-4">
+        <div class="flex justify-between items-start">
+          <div class="agent-icon w-13 h-13 rounded-2xl flex items-center justify-center" style="width:52px;height:52px">
+            <span class="material-symbols-outlined text-primary" style="font-size:26px">hub</span>
+          </div>
+          <span class="badge-active px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Active</span>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white">Orchestrator-01</h4>
+          <p class="text-[11px] text-on-surface-variant/60 font-mono uppercase tracking-wider mt-0.5">Core Scheduler</p>
+        </div>
+        <div class="space-y-2.5 mt-1">
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant/70">Load Capacity</span>
+            <span class="text-primary font-mono font-bold">94%</span>
+          </div>
+          <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+            <div class="progress-bar h-full" style="width: 94%"></div>
+          </div>
+          <div class="flex justify-between text-xs mt-3">
+            <span class="text-on-surface-variant/70">Tasks Routed</span>
+            <span class="text-on-surface/80 font-mono">1,248</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Researcher-A -->
+      <div class="liquid-card p-6 flex flex-col gap-4">
+        <div class="flex justify-between items-start">
+          <div class="agent-icon w-13 h-13 rounded-2xl flex items-center justify-center" style="width:52px;height:52px;background:linear-gradient(135deg,rgba(192,132,252,0.15),rgba(168,85,247,0.08));border-color:rgba(192,132,252,0.25);box-shadow:0 0 16px rgba(168,85,247,0.2)">
+            <span class="material-symbols-outlined text-secondary" style="font-size:26px">travel_explore</span>
+          </div>
+          <span class="badge-process px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Processing</span>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white">Researcher-A</h4>
+          <p class="text-[11px] text-on-surface-variant/60 font-mono uppercase tracking-wider mt-0.5">Semantic Discovery</p>
+        </div>
+        <div class="space-y-2.5 mt-1">
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant/70">Data Throughput</span>
+            <span class="text-secondary font-mono font-bold">42 GB/s</span>
+          </div>
+          <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+            <div class="progress-bar-secondary h-full" style="width: 60%"></div>
+          </div>
+          <div class="flex justify-between text-xs mt-3">
+            <span class="text-on-surface-variant/70">Queries Executed</span>
+            <span class="text-on-surface/80 font-mono">3,840</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Validator-X -->
+      <div class="liquid-card p-6 flex flex-col gap-4">
+        <div class="flex justify-between items-start">
+          <div class="agent-icon w-13 h-13 rounded-2xl flex items-center justify-center" style="width:52px;height:52px;background:linear-gradient(135deg,rgba(251,113,133,0.15),rgba(244,63,94,0.08));border-color:rgba(251,113,133,0.25);box-shadow:0 0 16px rgba(251,113,133,0.2)">
+            <span class="material-symbols-outlined text-tertiary" style="font-size:26px">verified_user</span>
+          </div>
+          <span class="badge-standby px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Standby</span>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold text-white">Validator-X</h4>
+          <p class="text-[11px] text-on-surface-variant/60 font-mono uppercase tracking-wider mt-0.5">Reasoning Engine</p>
+        </div>
+        <div class="space-y-2.5 mt-1">
+          <div class="flex justify-between text-xs">
+            <span class="text-on-surface-variant/70">Accuracy Rate</span>
+            <span class="text-tertiary font-mono font-bold">99.98%</span>
+          </div>
+          <div class="h-1.5 bg-white/5 rounded-full overflow-hidden">
+            <div class="progress-bar-tertiary h-full" style="width: 99%"></div>
+          </div>
+          <div class="flex justify-between text-xs mt-3">
+            <span class="text-on-surface-variant/70">Verified Reports</span>
+            <span class="text-on-surface/80 font-mono">982</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── MIDDLE ROW: Graph + Terminal ─── -->
+    <div id="middle-row-section" class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+
+      <!-- Neural Workflow Graph -->
+      <div id="workflow-graph-section" class="xl:col-span-2 liquid-card p-7 h-96 flex flex-col relative overflow-hidden">
+        <div class="flex justify-between items-center mb-6 relative z-10">
+          <div>
+            <h3 class="text-base font-bold text-white">Neural Workflow Graph</h3>
+            <p class="text-[11px] text-on-surface-variant/50 font-mono uppercase tracking-widest mt-0.5">LCEL Runnable Pipeline</p>
+          </div>
+          <div class="metric-pill px-3 py-1 text-[11px] font-mono flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-on-surface-variant/80">LIVE</span>
+          </div>
+        </div>
+        <div class="flex-1 relative">
+          <svg class="w-full h-full" viewBox="0 0 820 200">
+            <!-- Connection paths -->
+            <path class="neural-line" d="M100,100 C200,100 200,55 310,55" fill="none" stroke="rgba(244,114,182,0.35)" stroke-width="2"/>
+            <path class="neural-line" d="M100,100 C200,100 200,145 310,145" fill="none" stroke="rgba(244,114,182,0.35)" stroke-width="2" style="animation-delay:-5s"/>
+            <path class="neural-line" d="M310,55 C410,55 450,100 560,100" fill="none" stroke="rgba(192,132,252,0.4)" stroke-width="2" style="animation-delay:-10s"/>
+            <path class="neural-line" d="M310,145 C410,145 450,100 560,100" fill="none" stroke="rgba(192,132,252,0.4)" stroke-width="2" style="animation-delay:-15s"/>
+            <path class="neural-line" d="M560,100 L710,100" fill="none" stroke="rgba(251,113,133,0.4)" stroke-width="2" style="animation-delay:-3s"/>
+
+            <!-- Glow circles -->
+            <circle cx="100" cy="100" r="12" fill="rgba(244,114,182,0.08)" class="animate-pulse"/>
+            <circle cx="100" cy="100" r="8" fill="#ec4899" class="animate-pulse" style="filter:drop-shadow(0 0 8px #ec4899)"/>
+
+            <circle cx="310" cy="55" r="8" fill="rgba(255,255,255,0.25)"/>
+            <circle cx="310" cy="55" r="5" fill="#f9a8d4"/>
+
+            <circle cx="310" cy="145" r="8" fill="rgba(255,255,255,0.25)"/>
+            <circle cx="310" cy="145" r="5" fill="#f9a8d4"/>
+
+            <circle cx="560" cy="100" r="12" fill="rgba(192,132,252,0.08)" class="animate-pulse" style="animation-delay:.5s"/>
+            <circle cx="560" cy="100" r="8" fill="#a855f7" style="filter:drop-shadow(0 0 8px #a855f7)"/>
+
+            <circle cx="710" cy="100" r="14" fill="rgba(251,113,133,0.1)" class="animate-pulse" style="animation-delay:1s"/>
+            <circle cx="710" cy="100" r="10" fill="#fb7185" style="filter:drop-shadow(0 0 10px #fb7185)"/>
+          </svg>
+
+          <!-- Labels -->
+          <div class="absolute top-1/2 left-1 -translate-y-1/2">
+            <span class="text-[9px] font-mono uppercase text-primary/80 bg-primary/8 px-2 py-0.5 rounded" style="background:rgba(244,114,182,0.08)">Input</span>
+          </div>
+          <div class="absolute" style="top:18%;left:36%">
+            <span class="text-[9px] font-mono uppercase text-on-surface-variant/60 bg-white/5 px-2 py-0.5 rounded">Tavily</span>
+          </div>
+          <div class="absolute" style="top:65%;left:36%">
+            <span class="text-[9px] font-mono uppercase text-on-surface-variant/60 bg-white/5 px-2 py-0.5 rounded">BS4</span>
+          </div>
+          <div class="absolute top-1/2 -translate-y-1/2" style="left:63%">
+            <span class="text-[9px] font-mono uppercase text-secondary/80 bg-secondary/8 px-2 py-0.5 rounded" style="background:rgba(192,132,252,0.08)">Researcher-A</span>
+          </div>
+          <div class="absolute top-1/2 -translate-y-1/2 right-1">
+            <span class="text-[9px] font-mono uppercase text-tertiary/80 bg-tertiary/8 px-2 py-0.5 rounded" style="background:rgba(251,113,133,0.08)">Synthesis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Terminal -->
+      <div id="terminal-section" class="liquid-card p-5 flex flex-col h-96">
+        <!-- Terminal header -->
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-3 h-3 rounded-full" style="background:#ef4444;opacity:0.7"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#f59e0b;opacity:0.7"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#22c55e;opacity:0.7"></div>
+          <span class="ml-3 text-[11px] font-mono text-on-surface-variant/50 uppercase tracking-widest">System_Logs.vsh</span>
+        </div>
+        <div id="system-logs"
+             class="flex-1 overflow-y-auto terminal-scroll font-mono text-[11px] space-y-1.5 text-on-surface-variant/70">
+          <p style="color:rgba(244,114,182,0.8)">[14:22:01] Initialization sequence complete.</p>
+          <p>[14:22:05] Orchestrator-01 spinning up node clusters...</p>
+          <p>[14:22:08] Establishing neural handshake with Validator-X.</p>
+          <p style="color:rgba(192,132,252,0.8)">[14:22:12] Researcher-A: Scraping financial indices...</p>
+          <p>[14:22:15] API Request: GET /market/v2/delta - 200 OK</p>
+          <p>[14:22:22] Vector embedding process started: 4.2M tokens.</p>
+          <p style="color:rgba(251,113,133,0.8)">[14:22:30] Synthesis complete. Ready for deployment.</p>
+          <div class="flex gap-2 mt-2">
+            <span style="color:#f472b6" class="cursor">▋</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══════════════ DEPLOY MODAL ═══════════════ -->
+<div id="deploy-agent-modal"
+     class="fixed inset-0 modal-overlay hidden flex items-center justify-center z-50 transition-opacity duration-300">
+  <div class="glass-bright p-8 rounded-vision w-full max-w-lg space-y-6 relative"
+       style="border: 1px solid rgba(244,114,182,0.25); box-shadow: 0 0 60px rgba(236,72,153,0.2), 0 32px 64px rgba(0,0,0,0.6)">
+
+    <!-- Close btn -->
+    <button id="modal-close"
+            class="absolute top-4 right-4 text-on-surface-variant hover:text-primary transition-colors material-symbols-outlined"
+            style="font-size:22px">close</button>
+
+    <!-- Header -->
+    <div class="space-y-1.5">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center"
+             style="background:linear-gradient(135deg,#be185d,#ec4899);box-shadow:0 0 20px rgba(236,72,153,0.4)">
+          <span class="material-symbols-outlined text-white" style="font-size:20px">bolt</span>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-white">Deploy Multi-Agent Network</h3>
+          <p class="text-xs text-on-surface-variant/70">Configure and launch a new semantic discovery mission.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t divider-pink"></div>
+
+    <!-- Form -->
+    <div class="space-y-4">
+      <div class="space-y-2">
+        <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">Research Topic / Objective</label>
+        <textarea id="modal-query" rows="3"
+                  class="w-full text-sm p-3.5 text-white font-sans placeholder-on-surface-variant/40 transition-all"
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:14px;resize:none"
+                  placeholder="e.g., Explain the advancements in Solid State Batteries 2026..."></textarea>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div class="space-y-2">
+          <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">LLM Engine</label>
+          <select id="modal-engine"
+                  class="w-full text-sm p-3 text-white font-sans"
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:12px">
+            <option value="gemini">Google Gemini (Recommended)</option>
+            <option value="openai">OpenAI GPT-4o-mini</option>
+          </select>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[11px] font-mono text-primary/70 uppercase tracking-widest block">Depth Limit</label>
+          <select class="w-full text-sm p-3 text-white font-sans"
+                  style="background:rgba(13,5,16,0.7);border:1px solid rgba(244,114,182,0.15);border-radius:12px">
+            <option value="standard">Standard (5 searches)</option>
+            <option value="deep">Deep (10+ searches)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <button id="modal-submit"
+            class="btn-primary w-full py-4 flex items-center justify-center gap-2.5 text-sm tracking-wide">
+      <span class="material-symbols-outlined" style="font-size:20px">rocket_launch</span>
+      Launch Agents
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+  // ─── Live Clock ───────────────────────────────────────────────────────────
+  function updateClock() {
+    const el = document.getElementById('live-time');
+    if (el) el.textContent = new Date().toTimeString().split(' ')[0];
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // ─── Aurora WebGL Background ──────────────────────────────────────────────
+  const canvas = document.getElementById('aurora-bg');
+  const gl = canvas.getContext('webgl');
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const vsSource = `
+    attribute vec2 position;
+    varying vec2 v_texCoord;
+    void main() {
+      v_texCoord = position * 0.5 + 0.5;
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  `;
+
+  // Pink / rose / purple aurora shader
+  const fsSource = `
+    precision highp float;
+    varying vec2 v_texCoord;
+    uniform float u_time;
+
+    void main() {
+      vec2 uv = v_texCoord;
+      float time = u_time * 0.08;
+
+      vec2 p = uv * 3.0;
+      for(int i = 1; i < 5; i++) {
+        float fi = float(i);
+        p += vec2(
+          0.6 / fi * sin(fi * p.y + time + 0.4 * fi) + 0.9,
+          0.5 / fi * sin(fi * p.x + time + 0.3 * fi) + 1.4
+        );
+      }
+
+      float f = 0.5 + 0.5 * sin(p.x + p.y);
+
+      // Deep dark base — near black with a rose/purple tint
+      vec3 base   = vec3(0.028, 0.010, 0.045);
+      // Mid — dark magenta
+      vec3 mid    = vec3(0.10,  0.025, 0.12);
+      // Accent — deep rose
+      vec3 accent = vec3(0.22,  0.04,  0.18);
+
+      vec3 col = mix(base, mid, f);
+      col = mix(col, accent, 0.25 * sin(time * 0.4 + 1.0));
+
+      // Aurora glow layer — pink/purple
+      float aurora = smoothstep(0.25, 0.75, f);
+      col += vec3(0.35, 0.05, 0.30) * aurora * 0.12;
+      col += vec3(0.10, 0.00, 0.35) * aurora * 0.08;
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function createShader(gl, type, src) {
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh, src);
+    gl.compileShader(sh);
+    return sh;
+  }
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog, createShader(gl, gl.VERTEX_SHADER, vsSource));
+  gl.attachShader(prog, createShader(gl, gl.FRAGMENT_SHADER, fsSource));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const posAttr = gl.getAttribLocation(prog, 'position');
+  gl.enableVertexAttribArray(posAttr);
+  gl.vertexAttribPointer(posAttr, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  function renderAurora(t) {
+    gl.uniform1f(uTime, t * 0.001);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(renderAurora);
+  }
+  requestAnimationFrame(renderAurora);
+
+  // ─── 3D Neural Sphere (Three.js) ──────────────────────────────────────────
+  const sphereContainer = document.getElementById('neural-sphere');
+  const sw = sphereContainer.clientWidth || window.innerWidth;
+  const sh = sphereContainer.clientHeight || 400;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(70, sw / sh, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  renderer.setSize(sw, sh);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  sphereContainer.appendChild(renderer.domElement);
+
+  // Pink point sphere
+  const geo = new THREE.IcosahedronGeometry(1.8, 4);
+  const mat = new THREE.PointsMaterial({
+    color: 0xec4899,
+    size: 0.028,
+    transparent: true,
+    opacity: 0.85,
+    blending: THREE.AdditiveBlending
+  });
+  const sphere = new THREE.Points(geo, mat);
+  scene.add(sphere);
+
+  // Purple wireframe overlay
+  const wireMat = new THREE.MeshBasicMaterial({
+    color: 0xc084fc,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.04,
+    blending: THREE.AdditiveBlending
+  });
+  const wire = new THREE.Mesh(geo, wireMat);
+  scene.add(wire);
+
+  // Ambient pink particles
+  const partGeo = new THREE.BufferGeometry();
+  const N = 350;
+  const pos = new Float32Array(N * 3);
+  for (let i = 0; i < N * 3; i++) pos[i] = (Math.random() - 0.5) * 9;
+  partGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  const partMat = new THREE.PointsMaterial({
+    color: 0xf9a8d4,
+    size: 0.010,
+    transparent: true,
+    opacity: 0.35,
+    blending: THREE.AdditiveBlending
+  });
+  const particles = new THREE.Points(partGeo, partMat);
+  scene.add(particles);
+
+  camera.position.z = 4;
+
+  function animateSphere(t) {
+    requestAnimationFrame(animateSphere);
+    sphere.rotation.y += 0.0014;
+    wire.rotation.y += 0.0014;
+    sphere.rotation.x += 0.0006;
+    const pulse = Math.sin(t * 0.0007) * 0.04 + 1;
+    sphere.scale.set(pulse, pulse, pulse);
+    wire.scale.set(pulse, pulse, pulse);
+    particles.rotation.y -= 0.0003;
+    renderer.render(scene, camera);
+  }
+  animateSphere(0);
+
+  window.addEventListener('resize', () => {
+    const w = sphereContainer.clientWidth;
+    const h = sphereContainer.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+
+  // ─── UI References ────────────────────────────────────────────────────────
+  const queryInput        = document.getElementById('query-input');
+  const btnSearchTrigger  = document.getElementById('btn-search-trigger');
+  const systemLogs        = document.getElementById('system-logs');
+  const defaultHeroContent = document.getElementById('default-hero-content');
+  const reportContainer   = document.getElementById('report-container');
+  const reportContent     = document.getElementById('report-content');
+
+  const deployAgentModal  = document.getElementById('deploy-agent-modal');
+  const btnDeployAgent    = document.getElementById('btn-deploy-agent');
+  const modalClose        = document.getElementById('modal-close');
+  const modalSubmit       = document.getElementById('modal-submit');
+  const modalQuery        = document.getElementById('modal-query');
+  const modalEngine       = document.getElementById('modal-engine');
+
+  const agentGridSection      = document.getElementById('agent-grid-section');
+  const middleRowSection      = document.getElementById('middle-row-section');
+  const workflowGraphSection  = document.getElementById('workflow-graph-section');
+  const terminalSection       = document.getElementById('terminal-section');
+
+  const navDashboard    = document.getElementById('nav-dashboard');
+  const navAgents       = document.getElementById('nav-agents');
+  const navWorkflows    = document.getElementById('nav-workflows');
+  const navIntelligence = document.getElementById('nav-intelligence');
+
+  const NAV_INACTIVE = 'flex items-center gap-3.5 p-3 rounded-xl hover:bg-white/5 text-on-surface-variant transition-all duration-200';
+  const NAV_ACTIVE   = 'nav-active flex items-center gap-3.5 p-3 rounded-xl transition-all duration-200';
+
+  // ─── Log helper ─────────────────────────────────────────────────────────
+  function appendLog(msg, type = 'default') {
+    const p = document.createElement('p');
+    const time = new Date().toTimeString().split(' ')[0];
+    p.textContent = `[${time}] ${msg}`;
+    const colorMap = {
+      primary:   'rgba(244,114,182,0.85)',
+      secondary: 'rgba(192,132,252,0.85)',
+      tertiary:  'rgba(251,113,133,0.85)',
+      error:     'rgba(248,113,113,0.9)',
+      default:   'rgba(209,163,196,0.6)'
+    };
+    p.style.color = colorMap[type] || colorMap.default;
+    systemLogs.appendChild(p);
+    systemLogs.scrollTop = systemLogs.scrollHeight;
+  }
+
+  // ─── Modal ───────────────────────────────────────────────────────────────
+  btnDeployAgent.addEventListener('click', () => {
+    deployAgentModal.classList.remove('hidden');
+  });
+  modalClose.addEventListener('click', () => {
+    deployAgentModal.classList.add('hidden');
+  });
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') deployAgentModal.classList.add('hidden');
+  });
+  // Close on backdrop click
+  deployAgentModal.addEventListener('click', e => {
+    if (e.target === deployAgentModal) deployAgentModal.classList.add('hidden');
+  });
+
+  // ─── Navigation ──────────────────────────────────────────────────────────
+  const heroSection = document.querySelector('section.liquid-card');
+
+  function setTabActive(tab) {
+    [navDashboard, navAgents, navWorkflows, navIntelligence].forEach(t => {
+      t.className = NAV_INACTIVE;
+    });
+    tab.className = NAV_ACTIVE;
+  }
+
+  navDashboard.addEventListener('click', e => {
+    e.preventDefault();
+    setTabActive(navDashboard);
+    heroSection.classList.remove('hidden');
+    agentGridSection.classList.remove('hidden');
+    middleRowSection.classList.remove('hidden');
+    workflowGraphSection.classList.remove('hidden');
+    terminalSection.classList.remove('hidden');
+    workflowGraphSection.className = 'xl:col-span-2 liquid-card p-7 h-96 flex flex-col relative overflow-hidden';
+    terminalSection.className      = 'liquid-card p-5 flex flex-col h-96';
+  });
+
+  navAgents.addEventListener('click', e => {
+    e.preventDefault();
+    setTabActive(navAgents);
+    heroSection.classList.add('hidden');
+    agentGridSection.classList.remove('hidden');
+    middleRowSection.classList.add('hidden');
+  });
+
+  navWorkflows.addEventListener('click', e => {
+    e.preventDefault();
+    setTabActive(navWorkflows);
+    heroSection.classList.add('hidden');
+    agentGridSection.classList.add('hidden');
+    middleRowSection.classList.remove('hidden');
+    workflowGraphSection.classList.remove('hidden');
+    terminalSection.classList.add('hidden');
+    workflowGraphSection.className = 'col-span-3 liquid-card p-7 h-[520px] flex flex-col relative overflow-hidden';
+  });
+
+  navIntelligence.addEventListener('click', e => {
+    e.preventDefault();
+    setTabActive(navIntelligence);
+    heroSection.classList.add('hidden');
+    agentGridSection.classList.add('hidden');
+    middleRowSection.classList.remove('hidden');
+    workflowGraphSection.classList.add('hidden');
+    terminalSection.classList.remove('hidden');
+    terminalSection.className = 'col-span-3 liquid-card p-5 flex flex-col h-[520px]';
+  });
+
+  // ─── Research Execution ──────────────────────────────────────────────────
+  async function executeResearch(query) {
+    if (!query) return;
+
+    systemLogs.innerHTML = '';
+    appendLog(`Initiating multi-agent research: "${query}"`, 'primary');
+
+    navDashboard.click();
+    defaultHeroContent.classList.add('hidden');
+    reportContainer.classList.remove('hidden');
+    reportContent.innerHTML = `
+      <div class="flex flex-col items-center justify-center py-12 gap-4">
+        <div style="width:48px;height:48px;border-radius:50%;border:3px solid rgba(244,114,182,0.3);border-top-color:#ec4899;animation:spin 0.8s linear infinite"></div>
+        <span style="color:rgba(244,114,182,0.9);font-size:15px;font-weight:600">Agents are actively gathering intelligence…</span>
+        <span style="color:rgba(209,163,196,0.5);font-size:12px;font-family:monospace">Researcher-A + Validator-X online</span>
+      </div>
+      <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+    `;
+
+    try {
+      const response = await fetch('/api/research', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const dataStr = line.slice(6).trim();
+          if (!dataStr) continue;
+          try {
+            const { message } = JSON.parse(dataStr);
+            if (message.startsWith('[FINAL_RESULT]')) {
+              const md = message.slice(14).trim();
+              reportContent.innerHTML = marked.parse(md);
+              appendLog('Report synthesized and rendered successfully.', 'tertiary');
+            } else if (message.startsWith('[ERROR]')) {
+              appendLog(message, 'error');
+              reportContent.innerHTML = `<div style="color:#fda4af;padding:16px;border:1px solid rgba(251,113,133,0.2);background:rgba(127,29,29,0.2);border-radius:12px">Error: ${message}</div>`;
+            } else {
+              const t = message.startsWith('[System]') ? 'primary' : 'secondary';
+              appendLog(message, t);
+            }
+          } catch (err) {
+            console.error('SSE parse error:', err);
+          }
+        }
+      }
+    } catch (err) {
+      appendLog(`Error: ${err.message}`, 'error');
+      reportContent.innerHTML = `<div style="color:#fda4af;padding:16px;border:1px solid rgba(251,113,133,0.2);background:rgba(127,29,29,0.2);border-radius:12px">Error: ${err.message}</div>`;
+    }
+  }
+
+  // ─── Input triggers ───────────────────────────────────────────────────────
+  queryInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') executeResearch(queryInput.value.trim());
+  });
+  btnSearchTrigger.addEventListener('click', () => {
+    executeResearch(queryInput.value.trim());
+  });
+  modalSubmit.addEventListener('click', () => {
+    const q = modalQuery.value.trim();
+    if (q) {
+      deployAgentModal.classList.add('hidden');
+      executeResearch(q);
+    }
+  });
+</script>
+</body>
+</html>
